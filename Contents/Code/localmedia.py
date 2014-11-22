@@ -249,14 +249,14 @@ def findSubtitles(part):
   file_paths = {}
   total_media_files = 0
   for path in paths:
-    path = helpers.unicodize(path)
+    path = helpers.unicodize(path).encode('utf-8')
     for file_path_listing in os.listdir(path):
 
       # When using os.listdir with a unicode path, it will always return a string using the
       # NFD form. However, we internally are using the form NFC and therefore need to convert
       # it to allow correct regex / comparisons to be performed.
       #
-      file_path_listing = helpers.unicodize(file_path_listing)
+      file_path_listing = helpers.unicodize(file_path_listing).encode('utf-8')
       if os.path.isfile(os.path.join(path, file_path_listing)):
         file_paths[file_path_listing.lower()] = os.path.join(path, file_path_listing)
 
